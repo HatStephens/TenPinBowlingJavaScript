@@ -7,20 +7,34 @@ function Game() {
 
 function Turn(number) {
 	this.pins = 10;
-	this.score = 0;
+	this.scoreBallOne = 0;
+	this.scoreBallTwo = 0;
 	this.turnInGame = number;
-	this.bowls = [new Bowl(this), new Bowl(this)];
+	this.bowlOne = new Bowl(this);
+	this.bowlTwo = new Bowl(this);
 };
 
 
-Turn.prototype._turnScore = function() {
-	this.score = 10 - this.pins;
+Turn.prototype._turnScore = function(number) {
+	if(number === 1) return this.scoreBallOne = 10 - this.pins;
+	return this.scoreBallTwo = 10 - this.scoreBallOne - this.pins;
+};
+
+Turn.prototype.bowlBallOne = function(number) {
+	this.bowlOne.pinsHit(number);
+	return this._turnScore(1);
+};
+
+Turn.prototype.bowlBallTwo = function(number) {
+	if(this.pins === 0) return undefined;
+	this.bowlTwo.pinsHit(number);
+	return this._turnScore(2);
 };
 
 
 function Bowl(turn) {};
 
 Bowl.prototype.pinsHit = function(number) {
-	turn.pins -= number;
-	return turn._turnScore();
+	if(number>turn.pins) return undefined;
+	return turn.pins -= number;
 };
