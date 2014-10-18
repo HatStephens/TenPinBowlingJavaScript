@@ -5,11 +5,19 @@ xdescribe('A Game', function() {
 	});
 });
 
-xdescribe('A Turn', function() {
+describe('A Turn', function() {
 
-	it('should start with 10 pins', function() {
+	beforeEach(function() {
 		turn = new Turn();
-		expect(turn.pins).toEqual(10)
 	});
 
-};);
+	it('should start with 10 pins', function() {
+		expect(turn.pins).toEqual(10);
+	});
+
+	it('should drop pins when they are hit', function () {
+		turn.pinsHit(3)
+		expect(turn.pins).toEqual(7);
+	});
+
+});
