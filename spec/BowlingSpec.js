@@ -8,6 +8,17 @@ describe('A Game', function() {
 		expect(game.turns.length).toEqual(10);
 	});
 
+	it('should store the value of every ball', function() {
+		game.getBowlScores();
+		expect(game.bowlScores.length).toEqual(20);
+	});
+
+	xit('should know how to score a Strike', function() {
+		turn.pinsHit(10);
+		secondTurn.pinsHit(3);
+		secondTurn.pinsHit(5);
+		expect(turn.score).toEqual(18)
+	});
 
 });
 
@@ -59,6 +70,23 @@ describe('A Turn', function() {
 		turn.bowlBallOne(3)
 		turn.bowlBallTwo(5)
 		expect(turn.scoreBallTwo).toEqual(5);
+	});
+
+	it('should know the total score without bonuses for the turn', function() {
+		turn.bowlBallOne(3);
+		turn.bowlBallTwo(5);
+		expect(turn.scoreBoth()).toEqual(8);
+	});
+
+	it('should know whether the turn was a strike', function() {
+		turn.bowlBallOne(10);
+		expect(turn.checkBonus()).toEqual("Strike")
+	});
+
+	it('should know whether the turn was a spare', function() {
+		turn.bowlBallOne(6);
+		turn.bowlBallTwo(4);
+		expect(turn.checkBonus()).toEqual("Spare")
 	});
 
 });
