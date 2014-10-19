@@ -13,12 +13,33 @@ describe('A Game', function() {
 		expect(game.bowlScores.length).toEqual(20);
 	});
 
-	xit('should know how to score a Strike', function() {
-		turn.pinsHit(10);
-		secondTurn.pinsHit(3);
-		secondTurn.pinsHit(5);
-		expect(turn.score).toEqual(18)
+	it('should store the value of a normal turn', function() {
+		game.turns[0].scoreBallOne = 3;  //game.turns[0].bowlBallOne(3);
+		game.turns[0].scoreBallTwo = 4;
+		expect(game.getTurnScores(0)).toEqual(7);
 	});
+
+	it('should store the value of a Spare turn', function() {
+		game.turns[0].scoreBallOne = 6;
+		game.turns[0].scoreBallTwo = 4;
+		game.turns[1].scoreBallOne = 2;
+		expect(game.getTurnScores(0)).toEqual(12);
+	});
+
+	it('should store the value of a Strike turn when not followed by a Strike', function() {
+		game.turns[0].scoreBallOne = 10;
+		game.turns[1].scoreBallOne = 2;
+		game.turns[1].scoreBallTwo = 4;
+		expect(game.getTurnScores(0)).toEqual(16);
+	});
+
+	it('should store the value of a Strike turn when followed by a Strike', function() {
+		game.turns[0].scoreBallOne = 10;
+		game.turns[1].scoreBallOne = 10;
+		game.turns[2].scoreBallOne = 4;
+		expect(game.getTurnScores(0)).toEqual(24);
+	});
+
 
 });
 
