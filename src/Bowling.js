@@ -34,8 +34,8 @@ Game.prototype.lastTurnCheck = function(number) {
 	if(this.turns[number].checkBonus() === "Strike") return "Strike";
 };
 
-Game.prototype.giveExtraTurn = function(number, conditional) {
-	if(this.lastTurnCheck(number) === "Strike" && conditional === 1) return this.turns.push(new Turn(number+1, 1));
+Game.prototype.giveExtraTurn = function(number) {
+	if(this.lastTurnCheck(number) === "Strike" && number === 10) return this.turns.push(new Turn(number+1, 1));
 	if(this.lastTurnCheck(number) === "Strike") return this.turns.push(new Turn(number+1));
 	if(this.lastTurnCheck(number) === "Spare") return this.turns.push(new Turn(number+1, 1));
 };

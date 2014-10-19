@@ -64,7 +64,7 @@ describe('A Game', function() {
 		game.turns[9].bowlBallOne(10);
 		game.giveExtraTurn(9);
 		game.turns[10].bowlBallOne(10);
-		game.giveExtraTurn(10, 1);
+		game.giveExtraTurn(10);
 		expect(game.turns.length).toEqual(12);
 	});
 
@@ -72,7 +72,7 @@ describe('A Game', function() {
 		game.turns[9].bowlBallOne(10);
 		game.giveExtraTurn(9);
 		game.turns[10].bowlBallOne(10);
-		game.giveExtraTurn(10,1);
+		game.giveExtraTurn(10);
 		expect(game.turns[11].bowlTwo).toBe(undefined);
 	});
 
