@@ -51,7 +51,7 @@ describe('A Turn', function() {
 	it('should know the total score without bonuses for the turn', function() {
 		turn.bowlBallOne(3);
 		turn.bowlBallTwo(5);
-		expect(turn.scoreBoth()).toEqual(8);
+		expect(turn._scoreBoth()).toEqual(8);
 	});
 
 	it('should know whether the turn was a strike', function() {
@@ -65,7 +65,17 @@ describe('A Turn', function() {
 		expect(turn.checkBonus()).toEqual("Spare")
 	});
 
-	
+	it('should not allow the first bowl to be bowled again', function() {
+		turn.bowlBallOne(0);
+		expect(turn.bowlBallOne(4)).toBe(undefined);
+	});
+
+	it('should not allow the second bowl to be bowled again', function() {
+		turn.bowlBallTwo(0);
+		expect(turn.bowlBallTwo(4)).toBe(undefined);
+	});
+
+
 
 });
 
