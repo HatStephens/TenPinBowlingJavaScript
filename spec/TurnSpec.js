@@ -65,5 +65,7 @@ describe('A Turn', function() {
 		expect(turn.checkBonus()).toEqual("Spare")
 	});
 
+	
+
 });
 

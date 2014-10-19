@@ -11,7 +11,7 @@ describe('A Game', function() {
 	it('should store the value of every ball', function() {
 		game.getBowlScores();
 		expect(game.bowlScores.length).toEqual(20);
-	});
+	});  // is this needed???
 
 	it('should store the value of a normal turn', function() {
 		game.turns[0].bowlBallOne(3);
@@ -40,6 +40,12 @@ describe('A Game', function() {
 		expect(game.getTurnScores(0)).toEqual(24);
 	});
 
-
+	it('should store the cumulative score', function() {
+		game.turns[0].bowlBallOne(10);
+		game.turns[1].bowlBallOne(10);
+		game.turns[2].bowlBallOne(4);
+		game.turns[2].bowlBallTwo(3);
+		expect(game.calculateTotalScore()).toEqual(48);
+	});
 });
 
