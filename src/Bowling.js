@@ -62,9 +62,11 @@ Turn.prototype.checkBonus = function() {
 };
 
 
-function Bowl(turn) {};
+function Bowl(turn) {
+	this.turn = turn;
+};
 
 Bowl.prototype.pinsHit = function(number) {
-	if(number>turn.pins) return undefined;
-	return turn.pins -= number;
+	if(number>this.turn.pins) return undefined;
+	return this.turn.pins -= number;
 };
