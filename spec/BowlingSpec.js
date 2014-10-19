@@ -89,5 +89,24 @@ describe('A Game', function() {
 		game.giveExtraTurn(9);
 		expect(game.turns[10].bowlTwo).toBe(undefined);
 	});
+
+	it('should score 300 for a Perfect Game', function() {
+		for(var i=0; i<10; i++){
+			game.turns[i].bowlBallOne(10);
+		}
+		game.giveExtraTurn(9);
+		game.turns[10].bowlBallOne(10);
+		game.giveExtraTurn(10);
+		game.turns[11].bowlBallOne(10);
+		expect(game.calculateTotalScore()).toEqual(300);
+	});
+
+	it('should score 0 for a Gutter Game', function() {
+		for(var i=0; i<10; i++){
+			game.turns[i].bowlBallOne(0);
+			game.turns[i].bowlBallTwo(0);
+		}
+		expect(game.calculateTotalScore()).toEqual(0);
+	});
 });
 
