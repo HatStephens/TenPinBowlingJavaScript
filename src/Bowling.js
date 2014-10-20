@@ -27,25 +27,17 @@ Game.prototype._spareBonus = function(number) {
 };
 
 Game.prototype._strikeBonus = function(number) {
+	if(number===8 && this.turns[9].checkBonus() === "Strike") return this.turns[8]._scoreBoth() + this.turns[9]._scoreBoth();
 	if(this.turns[number+1].checkBonus() === "Strike") return this.turns[number]._scoreBoth() + this.turns[number + 1]._scoreBoth() + this.turns[number+2].scoreBallOne;
-	return this.turns[number]._scoreBoth() + this.turns[number+1].scoreBallOne + this.turns[number+1].scoreBallTwo;
-};
-
-Game.prototype.lastTurnCheck = function(number) {
-	if(this.turns[number].checkBonus() === "Spare") return "Spare";
-	if(this.turns[number].checkBonus() === "Strike") return "Strike";
-};
-
-Game.prototype.giveExtraTurn = function(number) {
-	if(this.lastTurnCheck(number) === "Strike" && number === 10) return this.turns.push(new Turn(number+1, 1));
-	if(this.lastTurnCheck(number) === "Strike") return this.turns.push(new Turn(number+1));
-	if(this.lastTurnCheck(number) === "Spare") return this.turns.push(new Turn(number+1, 1));
+	return this.turns[number]._scoreBoth() + this.turns[number+1]._scoreBoth();
 };
 
 Game.prototype._getFinalTurnScore = function() {
-	
+	var finalTurnScore = 0;
+	if(this.turns[9].checkBonus() === 'Strike' && this.turns[9].scoreBallTwo === 10) return (20 + this.turns[9].scoreBallThree);
+	if(this.turns[9].checkBonus() === 'Strike') return (10 + this.turns[9].scoreBallTwo + this.turns[9].scoreBallThree);
+	return this.turns[9]._scoreBoth() + this.turns[9].scoreBallThree;
 };
-
 
 
 

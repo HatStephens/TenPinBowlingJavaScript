@@ -23,7 +23,12 @@ describe('A Final Turn', function() {
 
 	it('should always allow the first bowl', function() {
 		finale.bowlBallOne(3);
-		expect(finale.scoreBallOne).toEqual(3);
+		expect(finale.pins).toEqual(7);
+	});
+
+	it('should know if the Final Turn starts with a Strike', function() {
+		finale.bowlBallOne(10);
+		expect(finale.checkBonus()).toEqual('Strike')
 	});
 
 	it('should allow the second bowl if the first bowl scored less than 10', function() {
@@ -36,6 +41,12 @@ describe('A Final Turn', function() {
 		finale.bowlBallOne(10);
 		finale.bowlBallTwo(3);
 		expect(finale.pins).toEqual(7);
+	});
+
+	it('should know whether the Final Turn was a Spare', function() {
+		finale.bowlBallOne(7);
+		finale.bowlBallTwo(3);
+		expect(finale.checkBonus()).toEqual('Spare')	
 	});
 
 	it('should not allow the third bowl if the first two score less than 10', function() {
@@ -65,11 +76,6 @@ describe('A Final Turn', function() {
 		expect(finale.pins).toEqual(6);
 	});
 
-	// it('', function() {
-		
-	// });
-
-
 	it('should not allow the first bowl to be bowled again', function() {
 		finale.bowlBallOne(0);
 		expect(finale.bowlBallOne(4)).toBe(undefined);
@@ -78,6 +84,11 @@ describe('A Final Turn', function() {
 	it('should not allow the second bowl to be bowled again', function() {
 		finale.bowlBallTwo(0);
 		expect(finale.bowlBallTwo(4)).toBe(undefined);
+	});
+
+	it('should not allow the third bowl to be bowled again', function() {
+		finale.bowlBallThree(0);
+		expect(finale.bowlBallThree(4)).toBe(undefined);
 	});
 
 });

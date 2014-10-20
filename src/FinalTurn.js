@@ -16,7 +16,7 @@ FinalTurn.prototype.bowlBallOne = function(number) {
 };
 
 FinalTurn.prototype.bowlBallTwo = function(number) {
-	if(this.pins === 0) this.pins = 10;
+	if(this.checkBonus()==='Strike') this.pins = 10;
 	if(this.scoreBallTwo !== null) return undefined;
 	this.bowlTwo.pinsHit(number);
 	return this._bowlTwoScore();
@@ -43,9 +43,9 @@ FinalTurn.prototype._bowlTwoScore = function() {
 };
 
 FinalTurn.prototype._bowlThreeScore = function() {
-	if(this.scoreBallOne === 10){
-
-	}
+	if(this.checkBonus()==="Spare") return this.scoreBallThree = 10 - this.pins;
+	if(this.checkBonus()==="Strike" && this.scoreBallTwo === 10 ) return this.scoreBallThree = 10 - this.pins;
+	return this.scoreBallThree = 10 - this.scoreBallTwo - this.pins
 };
 
 FinalTurn.prototype._scoreBoth = function() {
@@ -57,11 +57,4 @@ FinalTurn.prototype.checkBonus = function() {
 	if(this._scoreBoth() === 10) return "Spare";
 	return "none";
 };
-
-// FinalTurn.prototype._turnScore = function(bowlNumber) {
-// 	if(bowlNumber === 1) return this.scoreBallOne = 10 - this.pins;
-// 	if(this.scoreBallOne === 10) return this.scoreBallTwo = 10 - this.pins;
-// 	return this.scoreBallTwo = 10 - this.scoreBallOne - this.pins;
-// };
-
 

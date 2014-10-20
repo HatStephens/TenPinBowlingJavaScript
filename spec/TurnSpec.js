@@ -75,7 +75,5 @@ describe('A Turn', function() {
 		expect(turn.bowlBallTwo(4)).toBe(undefined);
 	});
 
-
-
 });
 
