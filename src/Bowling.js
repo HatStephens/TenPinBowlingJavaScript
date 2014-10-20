@@ -1,16 +1,18 @@
 function Game() {
 	this.turns = []
-	for(var i=0; i<10; i++){
+	for(var i=0; i<9; i++){
 		this.turns.push(new Turn(i+1));
 	}
+	this.turns.push(new FinalTurn());
 	this.totalScore = 0;
 };
 
 Game.prototype.calculateTotalScore = function () {
 	this.totalScore = 0;
-	for(var turn=0; turn<10; turn++){
+	for(var turn=0; turn<9; turn++){
 		this.totalScore += this._getTurnScores(turn);
 	}
+	this.totalScore += this._getFinalTurnScore();
 	return this.totalScore;
 };
 
@@ -38,6 +40,10 @@ Game.prototype.giveExtraTurn = function(number) {
 	if(this.lastTurnCheck(number) === "Strike" && number === 10) return this.turns.push(new Turn(number+1, 1));
 	if(this.lastTurnCheck(number) === "Strike") return this.turns.push(new Turn(number+1));
 	if(this.lastTurnCheck(number) === "Spare") return this.turns.push(new Turn(number+1, 1));
+};
+
+Game.prototype._getFinalTurnScore = function() {
+	
 };
 
 

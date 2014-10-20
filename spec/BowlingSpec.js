@@ -4,7 +4,7 @@ describe('A Game', function() {
 		game = new Game();
 	});
 
-	it('should start with 10 turns', function() {
+	it('should start with 9 Turns and 1 Final Turn', function() {
 		expect(game.turns.length).toEqual(10);
 	});
 
